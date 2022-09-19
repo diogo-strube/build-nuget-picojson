@@ -1,0 +1,36 @@
+resources:
+  repositories:
+    - repository: picojson
+      type: github
+      endpoint: gh
+      name: kazuho/picojson
+      ref: refs/tags/v1.3.0
+
+variables:
+- group: NuGet
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - checkout: self
+    displayName: "Cloning build-nuget-picojson"
+  - checkout: picojson
+    displayName: "Cloning picojson"
+
+  - script: dir
+    displayName: "List Directories"
+    
+  # - task: NuGetCommand@2
+  #   displayName: "Packaging NuGet Pkg"
+  #   inputs:
+  #     command: 'pack'
+  #     packagesToPack: './build-nuget-cli11/cli11.nuspec'
+  #     packDestination: '$(System.DefaultWorkingDirectory)'
+  #     versioningScheme: 'off'
+      
+  # - script: nuget push ./*.nupkg -src https://api.nuget.org/v3/index.json -ApiKey $(nuget-apikey)
+  #   displayName: "Pushing NuGet Pkg"
