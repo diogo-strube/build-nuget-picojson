@@ -21,7 +21,7 @@ steps:
   - checkout: picojson
     displayName: "Cloning picojson"
 
-  - powershell: dir
+  - script: ls
     displayName: "List Directories"
     
   # - task: NuGetCommand@2
