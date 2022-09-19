@@ -21,16 +21,13 @@ steps:
   - checkout: picojson
     displayName: "Cloning picojson"
 
-  - script: ls
-    displayName: "List Directories"
-    
-  # - task: NuGetCommand@2
-  #   displayName: "Packaging NuGet Pkg"
-  #   inputs:
-  #     command: 'pack'
-  #     packagesToPack: './build-nuget-cli11/cli11.nuspec'
-  #     packDestination: '$(System.DefaultWorkingDirectory)'
-  #     versioningScheme: 'off'
+  - task: NuGetCommand@2
+    displayName: "Packaging NuGet Pkg"
+    inputs:
+      command: 'pack'
+      packagesToPack: './build-nuget-picojson/picojson.nuspec'
+      packDestination: '$(System.DefaultWorkingDirectory)'
+      versioningScheme: 'off'
       
-  # - script: nuget push ./*.nupkg -src https://api.nuget.org/v3/index.json -ApiKey $(nuget-apikey)
-  #   displayName: "Pushing NuGet Pkg"
+  - script: nuget push ./*.nupkg -src https://api.nuget.org/v3/index.json -ApiKey $(nuget-apikey)
+    displayName: "Pushing NuGet Pkg"
